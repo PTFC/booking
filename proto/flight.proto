@@ -1,0 +1,29 @@
+syntax = "proto3";
+package training;
+option go_package = "./;pb";
+
+import "google/protobuf/timestamp.proto";
+
+service FPTFlight {
+    rpc CreateFlight(Flight) returns (Flight);
+    rpc UpdateFlight(Flight) returns (Flight);
+    rpc SearchFlight(SearchFlightRequest) returns (ListFlightResponse);
+}
+
+message Flight {
+    string id = 1;
+    string name = 2;
+    string from = 3;
+    string to = 4;
+    google.protobuf.Timestamp date = 5;
+    string status = 6;
+    int64 available_slot = 7;
+}
+
+message SearchFlightRequest {
+    string QueryString = 1;
+}
+
+message ListFlightResponse {
+    repeated Flight flights = 1;
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+package training;
+option go_package = "./;pb";
+
+import "empty.proto";
+import "booking.proto";
+
+service FPTCustomer {
+    rpc CreateCustomer(Customer) returns (Customer);
+    rpc UpdateCustomer(Customer) returns (Customer);
+    rpc ChangePassword(ChangePasswordRequest) returns (Empty);
+    rpc BookingHistory(BookingHistoryRequest) returns (BookingHistoryResponse);
+}
+
+message Customer {
+    string id = 1;
+    string name = 2;
+    string license_id = 3;
+    string phone_number = 4;
+    string email = 5;
+    string password = 6;
+    bool active = 7;
+}
+
+message ChangePasswordRequest {
+    string id = 1;
+    string password = 2;
+}
+
+message BookingHistoryRequest {
+    int64 customer_id = 1;
+}
+
+message BookingHistoryResponse {
+    repeated Booking bookings = 1;
+}
